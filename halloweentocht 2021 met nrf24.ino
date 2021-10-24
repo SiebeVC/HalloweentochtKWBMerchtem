@@ -45,12 +45,14 @@ void loop() {
 
 byte schakelaar_status = digitalRead(button);
 
-if(digitalRead(button) == 0){ 
+if(digitalRead(button) == 0)
+{ 
   digitalWrite(13, HIGH); //controle led aan (op arduino zelf)
   if(schakelaar_status != digitalRead(button)){ //debug 'functie'
     Serial.println("Schakelaar is 1");}
 
-  if(Time() < 12000 && state[0]){
+  if(Time() < 12000 && state[0])
+  {
     digitalWrite(relay[5], HIGH); //spot uit, begin van de scene
     digitalWrite(relay[6], HIGH); //extra spot uit
     digitalWrite(relay[0], LOW); //laat perslucht cilinders omhoog gaan
@@ -58,35 +60,42 @@ if(digitalRead(button) == 0){
     state[0] = false;
   }
   
-  if(Time() < 12000){ //hier wordt de ledstrip geregeld
-    if(step<256){
-      if(Time() > 5*step && Time() <= 5*(step+1)){
+  if(Time() < 12000) //hier wordt de ledstrip geregeld
+  {
+    if(step<256)
+    {
+      if(Time() > 5*step && Time() <= 5*(step+1))
+      {
         analogWrite(ledstrip[0], step);
         step++;
       }
     }
   }
 
-  if(Time() > 6000 && state[3]){
+  if(Time() > 6000 && state[3])
+  {
     servo_rookmachine.write(0); //rookmachine uit
     RadioAan();
     digitalWrite(relay[5], LOW); //spot aan
     state[3] = false;
   }
 
-  if(Time() >= 15000 && state[1]){ //cilinders zakken na 15 seconden
+  if(Time() >= 15000 && state[1]) //cilinders zakken na 15 seconden
+  {
     digitalWrite(relay[0], HIGH);
     state[1] = false;
     Serial.println("Loop 2");
   }
   //na 10 seconden moet het rode licht terug uit
-  if(Time() >= 25000 && state[2]){
+  if(Time() >= 25000 && state[2])
+  {
     digitalWrite(ledstrip[0], LOW); //ledstrip uit
     state[2] = false;
   }
 
   if(Time() >= 27000){
-    for(byte i=0; i<sizeof(state)/sizeof(state[0]); i++){
+    for(byte i=0; i<sizeof(state)/sizeof(state[0]); i++)
+    {
       state[i] = true;
     }
     RadioUit();
@@ -96,13 +105,15 @@ if(digitalRead(button) == 0){
 }
 
 if(digitalRead(button)==1){
-  if(schakelaar_status != digitalRead(button)){ //dit zodat de loop maar 1 keer wordt uitgevoerd
+  if(schakelaar_status != digitalRead(button))  //dit zodat de loop maar 1 keer wordt uitgevoerd
+  {
     NietActiefScene();
   }
   
   time = millis();
   step=0;
-  for(byte i=0; i<3; i++){
+  for(byte i=0; i<3; i++)
+  {
     state[i]=1;
   }
 }
