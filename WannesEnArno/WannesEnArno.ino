@@ -18,7 +18,7 @@ void setup() {
   for(byte i=0; i<aantalTijden; i++){
     time[i] = millis();
   }
-  digitalWrite(Doodskisten, doodskistState)
+  digitalWrite(Doodskisten, doodskistState);
   digitalWrite(StoelOmhoog, stoelState);
   digitalWrite(StoelOmlaag, !stoelState);
 }
