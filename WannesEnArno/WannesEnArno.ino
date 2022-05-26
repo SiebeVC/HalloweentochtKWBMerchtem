@@ -1,6 +1,6 @@
-byte StoelOmhoog = 2; //pin 2
-byte StoelOmlaag = 3; //pin 3
-byte Doodskisten = 4; //pin 4
+const byte StoelOmhoog = 2; //pin 2
+const byte StoelOmlaag = 3; //pin 3
+const byte Doodskisten = 4; //pin 4
 
 const long doodskistTijd = 5000; //5000 miliseconden
 const long stoelTijd = 50000; //50000 miliseconden
